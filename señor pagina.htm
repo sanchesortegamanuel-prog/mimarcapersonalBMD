@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bertín Méndez | Mentoría Ejecutiva & Libertad Financiera</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #0A192F; 
+            --secondary: #D4AF37; 
+            --accent: #112240;
+            --text-main: #2D3748;
+            --text-light: #718096;
+            --bg-light: #F8FAFC;
+            --white: #ffffff;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text-main);
+            background-color: var(--white);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 { font-family: 'Playfair Display', serif; color: var(--primary); }
+
+        /* --- NAVEGACIÓN --- */
+        header {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0,0,0,0.08);
+            transition: var(--transition);
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo-wrapper { 
+            display: flex; 
+            align-items: center; 
+            text-decoration: none; 
+            gap: 20px; 
+            padding: 5px 0;
+        }
+        .logo-img { 
+            width: 90px; 
+            height: 90px; 
+            border-radius: 50%; 
+            border: 3px solid var(--secondary);
+            object-fit: cover;
+            background: #fff;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+            transition: var(--transition);
+        }
+        .logo-wrapper:hover .logo-img { transform: scale(1.05); border-color: var(--primary); }
+
+        .logo-text h1 { font-size: 1.6rem; margin: 0; line-height: 1.1; font-weight: 900; }
+        .logo-text span { font-size: 0.75rem; color: var(--secondary); font-weight: 800; text-transform: uppercase; letter-spacing: 2.5px; }
+
+        .nav-links { display: flex; gap: 30px; list-style: none; align-items: center; }
+        .nav-links a { text-decoration: none; color: var(--primary); font-weight: 700; font-size: 0.95rem; transition: var(--transition); position: relative; }
+        .nav-links a::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -5px; left: 0; background-color: var(--secondary); transition: 0.3s; }
+        .nav-links a:hover::after { width: 100%; }
+
+        .btn-cta { 
+            background: linear-gradient(135deg, var(--secondary) 0%, #B8860B 100%);
+            color: white !important;
+            padding: 14px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.5); }
+
+        /* --- HERO --- */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(rgba(10, 25, 47, 0.8), rgba(10, 25, 47, 0.9)), 
+                        url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            padding: 120px 0 60px 0;
+        }
+
+        .hero-content { max-width: 850px; }
+        .hero-badge { 
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--secondary);
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 25px;
+            border-left: 4px solid var(--secondary);
+        }
+
+        .hero h2 { font-size: clamp(2.5rem, 5vw, 4.5rem); color: white; margin-bottom: 25px; line-height: 1.1; }
+        .hero p { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.9; max-width: 700px; }
+
+        /* --- ESTADÍSTICAS --- */
+        .stats-grid { 
+            display: grid; 
+            grid-template-columns: repeat(3, 1fr); 
+            gap: 40px; 
+            margin-top: 60px; 
+            padding-top: 40px; 
+            border-top: 1px solid rgba(255,255,255,0.1); 
+        }
+        .stat-item h3 { color: var(--secondary); font-size: 3rem; margin-bottom: 5px; }
+        .stat-item p { font-size: 0.9rem; text-transform: uppercase; letter-spacing: 1.5px; opacity: 0.8; }
+
+        /* --- SECCIONES --- */
+        .section { padding: 120px 0; }
+        .section-title { text-align: center; margin-bottom: 80px; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .section-title h2 { font-size: 3rem; margin-bottom: 25px; position: relative; padding-bottom: 20px; }
+        .section-title h2::after { content: ''; width: 80px; height: 5px; background: var(--secondary); position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); }
+
+        /* --- SERVICIOS --- */
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+        .card { 
+            background: white; 
+            padding: 60px 45px; 
+            border-radius: 30px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.05); 
+            transition: var(--transition); 
+            border: 1px solid #f0f0f0;
+            text-align: center;
+            position: relative;
+        }
+        .card:hover { transform: translateY(-15px); border-color: var(--secondary); box-shadow: 0 30px 60px rgba(0,0,0,0.1); }
+        .card i { font-size: 3.5rem; color: var(--secondary); margin-bottom: 30px; display: block; }
+        .card h3 { margin-bottom: 20px; font-size: 1.8rem; }
+
+        /* --- HISTORIA --- */
+        .story-section { background: var(--bg-light); position: relative; }
+        .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+        .story-img-container { position: relative; }
+        .story-img-container::before { content: ''; position: absolute; top: 20px; left: 20px; width: 100%; height: 100%; border: 5px solid var(--secondary); border-radius: 20px; z-index: 0; }
+        .story-img img { width: 100%; border-radius: 20px; position: relative; z-index: 1; box-shadow: 0 20px 40px rgba(0,0,0,0.2); }
+        
+        .story-text blockquote { 
+            font-size: 1.5rem; 
+            font-style: italic; 
+            color: var(--text-main); 
+            border-left: 5px solid var(--secondary); 
+            padding: 10px 0 10px 30px; 
+            margin: 35px 0; 
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        /* --- FOOTER --- */
+        footer { background: var(--primary); color: white; padding: 100px 0 40px; }
+        .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 80px; margin-bottom: 60px; }
+        .social-links { display: flex; gap: 15px; margin-top: 30px; }
+        .social-links a { 
+            width: 50px; height: 50px; 
+            background: rgba(255,255,255,0.08); 
+            border-radius: 12px; 
+            display: flex; align-items: center; justify-content: center; 
+            color: white; text-decoration: none; transition: var(--transition);
+            font-size: 1.2rem;
+        }
+        .social-links a:hover { background: var(--secondary); transform: translateY(-5px) rotate(8deg); }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .story-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .footer-grid { grid-template-columns: 1fr; gap: 40px; }
+            .hero h2 { font-size: 3rem; }
+            .stats-grid { grid-template-columns: 1fr; gap: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <div class="nav-container">
+                <a href="#" class="logo-wrapper">
+                    <img src="https://lh3.googleusercontent.com/d/1hyaF3jyHgAYqqLqJeLLKbOCHCA10zxAI" alt="Logo Bertín Méndez" class="logo-img">
+                    <div class="logo-text">
+                        <h1>Bertín Méndez</h1>
+                        <span>Mentoría Ejecutiva</span>
+                    </div>
+                </a>
+                <nav>
+                    <ul class="nav-links">
+                        <li><a href="#inicio">Inicio</a></li>
+                        <li><a href="#historia">Historia</a></li>
+                        <li><a href="#servicios">Servicios</a></li>
+                        <li><a href="#contacto" class="btn-cta">Agendar Sesión</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content" data-aos="fade-right">
+                <div class="hero-badge">EMPRENDIMIENTO & RESULTADOS REALES</div>
+                <h2>De $200 pesos a un Imperio de 5 Negocios</h2>
+                <p>Ayudo a emprendedores reales a ordenar su negocio, fortalecer su mentalidad y dirigir con claridad, para que el negocio crezca sin destruir su vida personal.</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>5</h3>
+                        <p>Negocios Activos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>+10</h3>
+                        <p>Mentees Exitosos</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>2020</h3>
+                        <p>Año de Fundación</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="servicios">
+        <div class="container">
+            <div class="section-title" data-aos="fade-up">
+                <h2>Servicios Especializados</h2>
+                <p>Estrategias claras y aplicables para estructurar negocios, fortalecer la mentalidad y dirigir con enfoque, incluso en mercados altamente competitivos.</p>
+            </div>
+            
+            <div class="grid-3">
+                <div class="card" data-aos="fade-up" data-aos-delay="100">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Escalabilidad</h3>
+                    <p>Implementamos sistemas claros y funcionales para que tu negocio crezca con orden, sin depender de tu presencia constante y sin perder el control de la operación diaria</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="200">
+                    <i class="fas fa-users"></i>
+                    <h3>Liderazgo transformacional</h3>
+                    <p>Desarrollamos líderes y equipos responsables, con mentalidad clara, enfoque en resultados y compromiso real con el crecimiento del negocio.</p>
+                </div>
+                <div class="card" data-aos="fade-up" data-aos-delay="300">
+                    <i class="fas fa-wallet"></i>
+                    <h3>Libertad Financiera</h3>
+                    <p>Sé lo que es empezar con nada y construirlo todo. Te ayudo a profesionalizar tu gestión de capital y diversificar con inteligencia para que tu éxito empresarial nunca te cueste tu paz familiar.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section story-section" id="historia">
+        <div class="container">
+            <div class="story-grid">
+                <div class="story-img-container" data-aos="fade-right">
+                    <div class="story-img">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80" alt="Sesión de Mentoría">
+                    </div>
+                </div>
+                <div class="story-text" data-aos="fade-left">
+                    <h2 style="font-size: 2.8rem; margin-bottom: 25px;">Una historia de resiliencia</h2>
+                    <p>Empezamos con $200 pesos, equipo prestado y una pandemia desafiando cada paso. Hoy, junto a mi esposa Olga, operamos 5 locales exitosos porque entendimos que el crecimiento real no depende del capital inicial, sino de la disciplina y la dirección correcta.</p>
+                    
+                    <blockquote>
+                        "No es el tamaño de tu presupuesto lo que define tu éxito, sino la claridad de tu mentalidad y la estructura de tu negocio para servir a los demás."
+                    </blockquote>
+                    
+                    <p>Mi enfoque en BMD es 100% práctico y humano: te comparto las estrategias reales que me permitieron transformar el desorden en rentabilidad y el sacrificio en un legado sostenible.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer id="contacto">
+        <div class="container">
+            <div class="footer-grid">
+                <div>
+                    <div class="logo-wrapper" style="margin-bottom: 25px;">
+                        <img src="https://lh3.googleusercontent.com/d/1hyaF3jyHgAYqqLqJeLLKbOCHCA10zxAI" alt="Logo" class="logo-img" style="width: 70px; height: 70px;">
+                        <h2 style="color: white; margin-left: 15px; font-family: 'Playfair Display';">Bertín Méndez</h2>
+                    </div>
+                    <p style="opacity: 0.7; font-size: 0.95rem;">Me especializo en ayudar a emprendedores y empresarios a transformar negocios desordenados en negocios estructurados, rentables y sostenibles, alineando marca, mentalidad y dirección para lograr crecimiento sin perder lo más importante: la vida personal.</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--secondary); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px;">Contacto</h4>
+                    <p style="opacity: 0.8; margin-bottom: 10px;"><strong>Email:</strong><br>basementalidadireccion@gmail.com</p>
+                    <p style="opacity: 0.8;"><strong>Ubicación:</strong><br>México / Global Online</p>
+                </div>
+                <div>
+                    <h4 style="color: var(--secondary); margin-bottom: 25px; text-transform: uppercase; letter-spacing: 2px;">Sígueme</h4>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1C7rztJjNp/" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        
+                        <a href="https://www.instagram.com/bertinmendez4?igsh=b3I3bHI1NXJ4ejgy" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        
+                        <a href="https://www.tiktok.com/@bertin.mendez1?_r=1&_t=ZS-938AedUIafQ" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-tiktok"></i>
+                        </a>
+                        
+                        <a href="https://youtube.com/@bertinmendezmentor?si=0Mm09n3uZxPVgO0y" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        
+                        <a href="https://wa.me/message/5BILYB4DJURMC1" target="_blank" rel="noopener noreferrer">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 30px; font-size: 0.85rem; opacity: 0.5;">
+                © 2026 Bertín Méndez. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+        
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.padding = '10px 0';
+                header.style.background = 'rgba(255, 255, 255, 0.98)';
+            } else {
+                header.style.padding = '15px 0';
+                header.style.background = 'rgba(255, 255, 255, 0.9)';
+            }
+        });
+    </script>
+</body>
+</html>
